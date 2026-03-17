@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pan's Wolfpack · Miami</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#140808;--bg2:#1E0E0E;--bg3:#261010;--card:#200C0C;
+  --orange:#FF8C42;--magenta:#FF3CAC;--gold:#FFD166;--cream:#FFF0E0;
+  --muted:#A07868;--dim:#5A3830;
+  --bo:rgba(255,140,66,0.2);--bm:rgba(255,60,172,0.2);--bg_:rgba(255,209,102,0.15);
+  --text:#FFF0E0;--nav-h:54px;
+  --serif:'Playfair Display',Georgia,serif;--sans:'Barlow',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;min-height:100vh}
+.hero{background:var(--bg);padding:52px 24px 40px;text-align:center;border-bottom:1px solid var(--bo);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(255,140,66,0.07) 0%,transparent 70%);pointer-events:none}
+.hero-stripe{display:flex;justify-content:center;gap:6px;margin-bottom:20px}
+.hero-stripe span{height:3px;border-radius:2px}
+.hs1{width:60px;background:var(--orange)}.hs2{width:40px;background:var(--magenta)}.hs3{width:20px;background:var(--gold)}
+.hero-ey{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.hero-title{font-family:var(--serif);font-size:clamp(40px,8vw,72px);line-height:1;color:var(--cream);margin-bottom:8px;font-weight:400}
+.hero-title em{color:var(--magenta);font-style:italic}
+.hero-sub{font-size:13px;color:var(--muted);letter-spacing:1px}
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(20,8,8,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--bo)}
+.nav{display:flex;max-width:960px;margin:0 auto;height:var(--nav-h);align-items:center;gap:3px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:6px 16px;border-radius:3px;font-size:12px;font-weight:500;letter-spacing:0.5px;color:var(--muted);cursor:pointer;border:0.5px solid transparent;transition:all 0.2s;white-space:nowrap;background:none;text-transform:uppercase;font-family:var(--sans)}
+.nav-tab:hover{color:var(--cream);border-color:var(--bo)}
+.nav-tab.active{color:var(--bg);background:var(--orange);border-color:var(--orange)}
+.nav-tab.mc-tab.active{background:var(--magenta);border-color:var(--magenta)}
+.page{display:none;max-width:960px;margin:0 auto;padding:36px 20px 80px}
+.page.active{display:block}
+.sec-label{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--bo)}
+.vibe{background:var(--card);border:1px solid var(--bo);border-radius:4px;padding:22px 26px;margin-bottom:28px;position:relative;overflow:hidden}
+.vibe::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--magenta))}
+.vibe h2{font-family:var(--serif);font-size:28px;color:var(--cream);margin-bottom:6px;font-weight:400}
+.vibe p{color:var(--muted);font-size:14px;line-height:1.6}
+.vibe-meta{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.vibe-pill{font-size:11px;padding:3px 12px;border-radius:2px;border:0.5px solid var(--bo);color:var(--orange)}
+.timeline{margin-bottom:32px}
+.tl-item{display:grid;grid-template-columns:52px 1px 1fr;gap:0 16px}
+.tl-time{font-size:11px;font-weight:500;color:var(--orange);text-align:right;padding-top:16px;line-height:1.2}
+.tl-spine{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);border:2px solid var(--bg);margin-top:19px;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,140,66,0.15)}
+.tl-dot.m{background:var(--magenta);box-shadow:0 0 0 3px rgba(255,60,172,0.15)}
+.tl-dot.g{background:var(--gold);box-shadow:0 0 0 3px rgba(255,209,102,0.15)}
+.tl-line{flex:1;width:1px;background:var(--bo);min-height:16px}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding:12px 0 20px}
+.tl-title{font-size:15px;font-weight:500;color:var(--cream);margin-bottom:4px}
+.tl-detail{font-size:13px;color:var(--muted);line-height:1.55}
+.tl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.tag{font-size:10px;padding:2px 10px;border-radius:2px;font-weight:500;letter-spacing:0.3px}
+.tag-o{background:rgba(255,140,66,0.1);color:var(--orange);border:0.5px solid var(--bo)}
+.tag-m{background:rgba(255,60,172,0.1);color:var(--magenta);border:0.5px solid var(--bm)}
+.tag-g{background:rgba(255,209,102,0.1);color:var(--gold);border:0.5px solid var(--bg_)}
+.cd-wrap{background:var(--bg2);border:1px solid var(--bm);border-radius:4px;padding:14px 18px;margin-top:10px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.cd-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--magenta);margin-bottom:4px}
+.cd-timer{font-family:var(--serif);font-size:30px;color:var(--cream);letter-spacing:2px}
+.cd-sub{font-size:11px;color:var(--muted)}
+.outfit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:32px}
+.outfit-card{background:var(--bg3);border:1px solid var(--bo);border-radius:4px;padding:18px 20px}
+.outfit-occ{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:var(--magenta);margin-bottom:6px}
+.outfit-title{font-family:var(--serif);font-size:17px;color:var(--cream);margin-bottom:8px;font-weight:400}
+.outfit-detail{font-size:13px;color:var(--muted);line-height:1.55}
+.outfit-items{margin-top:10px;display:flex;flex-direction:column;gap:4px}
+.oi{font-size:12px;color:var(--cream);display:flex;align-items:center;gap:8px}
+.oi::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.bring-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-bottom:32px}
+.bring-item{background:var(--bg2);border:1px solid rgba(255,140,66,0.1);border-radius:3px;padding:9px 14px;font-size:13px;color:var(--cream);display:flex;align-items:center;gap:8px}
+.bring-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--orange);flex-shrink:0}
+.pack-sec{margin-bottom:32px}
+.pack-sec h3{font-family:var(--serif);font-size:20px;color:var(--cream);margin-bottom:14px;font-weight:400}
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.pack-item{display:flex;align-items:center;gap:10px;background:var(--bg3);border:0.5px solid var(--bo);border-radius:3px;padding:10px 14px;font-size:13px;color:var(--text);cursor:pointer;transition:border-color 0.15s;user-select:none}
+.pack-item:hover{border-color:var(--orange)}
+.pack-item.checked{color:var(--dim);border-color:rgba(255,140,66,0.05)}
+.pack-check{width:15px;height:15px;border-radius:2px;border:1.5px solid var(--dim);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.pack-item.checked .pack-check{background:var(--orange);border-color:var(--orange)}
+.pack-item.checked .pack-check::after{content:'✓';font-size:9px;color:var(--bg);font-weight:700}
+.mc-top{text-align:center;padding:28px 0 24px}
+.mc-ey{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:8px}
+.mc-h{font-family:var(--serif);font-size:clamp(22px,5vw,36px);color:var(--cream);font-weight:400;margin-bottom:6px}
+.mc-clock{font-family:var(--serif);font-size:18px;color:var(--muted);letter-spacing:2px}
+.mc-stripe{display:flex;gap:6px;justify-content:center;margin-bottom:24px}
+.now-card{background:var(--bg2);border:1px solid var(--bm);border-radius:4px;padding:24px 28px;margin-bottom:14px;position:relative;overflow:hidden}
+.now-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--orange))}
+.now-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:10px}
+.now-ev{font-family:var(--serif);font-size:clamp(20px,4vw,28px);color:var(--cream);margin-bottom:6px;font-weight:400}
+.now-det{font-size:13px;color:var(--muted);margin-bottom:10px}
+.now-day{font-size:11px;color:var(--orange);letter-spacing:1px}
+.next-card{background:var(--bg3);border:1px solid var(--bo);border-radius:4px;padding:18px 24px;margin-bottom:28px}
+.next-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.next-ev{font-family:var(--serif);font-size:clamp(16px,3vw,20px);color:var(--cream);margin-bottom:4px;font-weight:400}
+.next-det{font-size:13px;color:var(--muted)}
+.next-when{font-size:12px;color:var(--gold);margin-top:8px}
+.mc-day-group{margin-bottom:20px}
+.mc-day-head{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--bo)}
+.mc-row{display:flex;gap:12px;align-items:baseline;padding:6px 8px;border-radius:3px}
+.mc-row.past .mc-ev-t,.mc-row.past .mc-ev-n{color:var(--dim)}
+.mc-row.current{background:rgba(255,60,172,0.07)}
+.mc-ev-t{font-size:11px;color:var(--orange);min-width:44px;font-weight:500}
+.mc-ev-n{font-size:13px;color:var(--cream)}
+.mc-badge{font-size:9px;padding:2px 8px;border-radius:2px;background:var(--magenta);color:var(--bg);margin-left:8px;font-weight:500;letter-spacing:0.5px;vertical-align:middle}
+.off-card{text-align:center;padding:48px 20px;border:1px solid var(--bo);border-radius:4px;margin-bottom:14px}
+.off-title{font-family:var(--serif);font-size:24px;color:var(--cream);margin-bottom:8px;font-weight:400}
+.off-sub{font-size:14px;color:var(--muted)}
+@media(max-width:600px){.hero{padding:40px 16px 32px}.page{padding:24px 16px 60px}.outfit-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-stripe"><span class="hs1"></span><span class="hs2"></span><span class="hs3"></span></div>
+  <p class="hero-ey">Miami · March 2026</p>
+  <h1 class="hero-title">Pan's <em>Wolfpack</em></h1>
+  <p class="hero-sub">19 men &nbsp;·&nbsp; 1 BnB &nbsp;·&nbsp; 4 days of chaos</p>
+</div>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <button class="nav-tab mc-tab active" onclick="show('mc',this)">Mission Control</button>
+    <button class="nav-tab" onclick="show('wed',this)">Wednesday</button>
+    <button class="nav-tab" onclick="show('thu',this)">Thursday</button>
+    <button class="nav-tab" onclick="show('fri',this)">Friday</button>
+    <button class="nav-tab" onclick="show('sat',this)">Saturday</button>
+    <button class="nav-tab" onclick="show('pack',this)">Pack List</button>
+  </nav>
+</div>
+
+<!-- MISSION CONTROL -->
+<section class="page active" id="page-mc">
+  <div class="mc-top">
+    <p class="mc-ey">Pan's Wolfpack · Status Board</p>
+    <h2 class="mc-h">Mission Control</h2>
+    <p class="mc-clock" id="live-clock">--:-- --</p>
+  </div>
+  <div class="mc-stripe">
+    <span style="width:50px;height:2px;border-radius:1px;background:var(--orange);display:block"></span>
+    <span style="width:30px;height:2px;border-radius:1px;background:var(--magenta);display:block"></span>
+    <span style="width:15px;height:2px;border-radius:1px;background:var(--gold);display:block"></span>
+  </div>
+  <div id="mc-now"></div>
+  <div id="mc-next"></div>
+  <div>
+    <p class="sec-label">Full schedule</p>
+    <div id="mc-full"></div>
+  </div>
+</section>
+
+<!-- WEDNESDAY -->
+<section class="page" id="page-wed">
+  <div class="vibe">
+    <h2>Wednesday — Kickoff Night</h2>
+    <p>Ed lands, the squad assembles, and the chaos begins. Shotgun kickoff at 10:45pm, then Kahoot and the Superlatives Slideshow take it deep into the night.</p>
+    <div class="vibe-meta">
+      <span class="vibe-pill">Arrival day</span>
+      <span class="vibe-pill">BnB kickoff</span>
+      <span class="vibe-pill">Low key → unhinged</span>
+    </div>
+  </div>
+  <p class="sec-label">Timeline</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-time">10:45pm</span>
+      <div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div>
+      <div class="tl-content">
+        <p class="tl-title">Shotgun Kickoff</p>
+        <p class="tl-detail">Ed lands at 10:26 — the moment he walks through the door, it's on.</p>
+        <div class="tl-tags"><span class="tag tag-m">Full squad</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-time">11:15pm</span>
+      <div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><p class="tl-title">Kahoot: The Life of Pan</p><p class="tl-detail">Drinking game Kahoot — how well do you know the man of the hour?</p><div class="tl-tags"><span class="tag tag-o">Drinking game</span></div></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-time">Midnight</span>
+      <div class="tl-spine"><div class="tl-dot g"></div><div class="tl-line"></div></div>
+      <div class="tl-content"><p class="tl-title">Superlatives Slideshow</p><p class="tl-detail">Awardees are assigned their drinks. Ceremony begins.</p><div class="tl-tags"><span class="tag tag-g">Ceremony</span></div></div>
+    </div>
+  </div>
+  <p class="sec-label">Outfit</p>
+  <div class="outfit-grid">
+    <div class="outfit-card">
+      <p class="outfit-occ">Travel · Arrival</p>
+      <p class="outfit-title">Casual arrival fit</p>
+      <p class="outfit-detail">Travel comfortable — you'll be on a plane or in transit. Still make an entrance.</p>
+      <div class="outfit-items"><span class="oi">Joggers or chinos</span><span class="oi">Clean tee or polo</span><span class="oi">Sneakers</span></div>
+    </div>
+    <div class="outfit-card">
+      <p class="outfit-occ">Night · Kickoff games</p>
+      <p class="outfit-title">First night casual</p>
+      <p class="outfit-detail">BnB games night — no need to dress up, but look alive.</p>
+      <div class="outfit-items"><span class="oi">Shorts or linen pants</span><span class="oi">Graphic tee or button-down</span><span class="oi">Clean sneakers or loafers</span></div>
+    </div>
+  </div>
+  <p class="sec-label">What to bring today</p>
+  <div class="bring-grid">
+    <div class="bring-item">All weekend luggage</div>
+    <div class="bring-item">Kahoot-ready phone</div>
+    <div class="bring-item">Cash for Costco split</div>
+    <div class="bring-item">Good bracket instincts</div>
+    <div class="bring-item">Your best superlative</div>
+  </div>
+</section>
+
+<!-- THURSDAY -->
+<section class="page" id="page-thu">
+  <div class="vibe">
+    <h2>Thursday — Boat Day</h2>
+    <p>The centrepiece. Catamaran to Biscayne Bay, BBQ on the water, sunset from the ocean. Then everyone showers and boards the party bus for a curated Miami bar crawl. Bus Survivor: who of the 19 makes it back?</p>
+    <div class="vibe-meta"><span class="vibe-pill">Boat day</span><span class="vibe-pill">Bar crawl</span><span class="vibe-pill">Bus Survivor</span></div>
+  </div>
+  <p class="sec-label">Timeline</p>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-time">11am</span><div class="tl-spine"><div class="tl-dot g"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Breakfast & Mandatory Group Devotion</p><p class="tl-detail">Praising Jesus Christ Our Lord and Savior. Led by Pastor Andrich.</p><div class="tl-tags"><span class="tag tag-g">Mandatory</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">Noon</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">March Madness Tip Off</p><p class="tl-detail">Champagne and mimosas are unleashed. J bool at the crib.</p><div class="tl-tags"><span class="tag tag-o">Champagne</span><span class="tag tag-o">Mimosas</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">2pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Basketball Chug Jug Relay</p><p class="tl-detail">May the best team survive.</p><div class="tl-tags"><span class="tag tag-m">Competition</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">3pm</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Party bus arrives</p><p class="tl-detail">Board with all your beer for the boat. Bathing suits on.</p><div class="tl-tags"><span class="tag tag-o">BYOB beer</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">4pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Set sail — 40-person Catamaran</p><p class="tl-detail">Biscayne Bay Island, 4 hours. BBQ provided. BYOB. Watch the sunset, play in the water. Return a mess to kickoff a legendary night.</p><div class="tl-tags"><span class="tag tag-m">Catamaran</span><span class="tag tag-o">BBQ provided</span><span class="tag tag-o">BYOB</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">8pm</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Return to BnB — SSS break</p><p class="tl-detail">Party bus waits. Shower and get ready for the night.</p></div></div>
+    <div class="tl-item"><span class="tl-time">9pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Miami bar crawl extravaganza</p><p class="tl-detail">5 stops of chaos. Keep alcohol on the bus to subsidize expensive bar drinks. Bus Survivor — who of the 19 will remain to ride back?</p><div class="tl-tags"><span class="tag tag-m">5 stops</span><span class="tag tag-o">Bus Survivor</span></div></div></div>
+  </div>
+  <p class="sec-label">Outfit</p>
+  <div class="outfit-grid">
+    <div class="outfit-card"><p class="outfit-occ">Day · On the boat</p><p class="outfit-title">Boat ready</p><p class="outfit-detail">You're on a catamaran for 4 hours. You will get wet.</p><div class="outfit-items"><span class="oi">Bathing suit (wear it)</span><span class="oi">Linen shirt or rash guard</span><span class="oi">Flip flops or boat shoes</span><span class="oi">Sunglasses + sunscreen</span></div></div>
+    <div class="outfit-card"><p class="outfit-occ">Night · Bar crawl</p><p class="outfit-title">Going-out fit</p><p class="outfit-detail">Smart casual to get past Miami door staff. Miami runs hot — keep it breathable.</p><div class="outfit-items"><span class="oi">Linen or satin button-down</span><span class="oi">Tailored shorts or chinos</span><span class="oi">Clean loafers or leather shoes</span></div></div>
+  </div>
+  <p class="sec-label">What to bring today</p>
+  <div class="bring-grid">
+    <div class="bring-item">Bathing suit (worn)</div><div class="bring-item">Sunscreen SPF 50+</div><div class="bring-item">Sunglasses</div><div class="bring-item">Beer for the boat</div><div class="bring-item">Going-out fit in bag</div><div class="bring-item">Night shoes in bag</div><div class="bring-item">Cash for bar crawl</div><div class="bring-item">Waterproof phone case</div>
+  </div>
+</section>
+
+<!-- FRIDAY -->
+<section class="page" id="page-fri">
+  <div class="vibe">
+    <h2>Friday — Recovery & Beach</h2>
+    <p>Slow morning. Watch March Madness horizontal. Basketball tournament in the afternoon, then an optional run to South Beach for football, ocean, and Ocean Drive at sunset.</p>
+    <div class="vibe-meta"><span class="vibe-pill">Recovery day</span><span class="vibe-pill">Basketball tournament</span><span class="vibe-pill">South Beach optional</span></div>
+  </div>
+  <p class="sec-label">Timeline</p>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-time">Noon</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Slow wake-up</p><p class="tl-detail">Recovery and rejuvenation. Watch March Madness horizontal on the couch.</p><div class="tl-tags"><span class="tag tag-o">Recovery</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">2pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Basketball Tournament</p><p class="tl-detail">Nearby courts in the neighbourhood. Bracket implications.</p><div class="tl-tags"><span class="tag tag-m">Competition</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">5pm</span><div class="tl-spine"><div class="tl-dot g"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">South Beach run (optional)</p><p class="tl-detail">Ubers to South Beach. Beach football, ocean swimming, stroll Ocean Drive. Leave at sunset.</p><div class="tl-tags"><span class="tag tag-g">Optional</span><span class="tag tag-o">Ubers</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">8:30pm</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Family Dinner at BnB</p><p class="tl-detail">Everyone back together. The whole squad at the table.</p><div class="tl-tags"><span class="tag tag-o">Full squad</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">10pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Poker Tournament</p><p class="tl-detail">Chips are on the table. Dignity is at stake.</p><div class="tl-tags"><span class="tag tag-m">Tournament</span></div></div></div>
+  </div>
+  <p class="sec-label">Outfit</p>
+  <div class="outfit-grid">
+    <div class="outfit-card"><p class="outfit-occ">Day · Basketball</p><p class="outfit-title">Athletic casual</p><p class="outfit-detail">Playing basketball in Miami heat. Keep it light.</p><div class="outfit-items"><span class="oi">Athletic shorts</span><span class="oi">Moisture-wicking tee</span><span class="oi">Basketball shoes or sneakers</span></div></div>
+    <div class="outfit-card"><p class="outfit-occ">Afternoon · South Beach</p><p class="outfit-title">Beach casual</p><p class="outfit-detail">Bathing suit base with something to throw on for Ocean Drive.</p><div class="outfit-items"><span class="oi">Bathing suit</span><span class="oi">Linen shirt or oversized tee</span><span class="oi">Flip flops + sunglasses</span></div></div>
+    <div class="outfit-card"><p class="outfit-occ">Evening · Dinner & Poker</p><p class="outfit-title">Smart relaxed</p><p class="outfit-detail">Family dinner energy — presentable but comfortable.</p><div class="outfit-items"><span class="oi">Shorts or chinos</span><span class="oi">Button-down or clean tee</span><span class="oi">Loafers or clean sneakers</span></div></div>
+  </div>
+  <p class="sec-label">What to bring today</p>
+  <div class="bring-grid">
+    <div class="bring-item">Basketball shoes</div><div class="bring-item">Bathing suit</div><div class="bring-item">Sunscreen</div><div class="bring-item">Uber app ready</div><div class="bring-item">Cash for poker</div><div class="bring-item">Poker face</div>
+  </div>
+</section>
+
+<!-- SATURDAY -->
+<section class="page" id="page-sat">
+  <div class="vibe">
+    <h2>Saturday — Hardrock & Rooftops</h2>
+    <p>Wake up like new men. Hardrock Casino pool party in the afternoon — gamble your savings or go nuts at the pool DJ. Party bus rescues everyone at 7pm for sophisticated rooftops and rustic beachfront venues. Ends with mandatory skinny dipping at 4am.</p>
+    <div class="vibe-meta"><span class="vibe-pill">Hardrock Casino</span><span class="vibe-pill">Pool party</span><span class="vibe-pill">Rooftop night</span></div>
+  </div>
+  <p class="sec-label">Timeline</p>
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-time">10am</span><div class="tl-spine"><div class="tl-dot g"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Wake up like new men</p><p class="tl-detail">Ready to conquer the world.</p></div></div>
+    <div class="tl-item"><span class="tl-time">Noon</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Basketball Penalties</p><p class="tl-detail">Tournament aftermath. Settle the scores.</p><div class="tl-tags"><span class="tag tag-o">Penalties</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">1pm</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Depart for Hardrock Casino Pool Party</p><p class="tl-detail">The infamous guitar-shaped casino. Gamble your savings or go nuts at the pool DJ. Both valid.</p><div class="tl-tags"><span class="tag tag-m">Pool party</span><span class="tag tag-o">Casino</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">7pm</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Party bus pickup</p><p class="tl-detail">Right when you're on the brink of collapse, the bus saves the day. Possible dinner pitstop.</p><div class="tl-tags"><span class="tag tag-o">Party bus</span></div></div></div>
+    <div class="tl-item"><span class="tl-time">8pm</span><div class="tl-spine"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">SSS at BnB — final night launch</p><p class="tl-detail">Bus waits. Then off to sophisticated rooftops, rustic beachfront venues, and more.</p></div></div>
+    <div class="tl-item"><span class="tl-time">4am</span><div class="tl-spine"><div class="tl-dot m"></div><div class="tl-line"></div></div><div class="tl-content"><p class="tl-title">Mandatory Celebratory Skinny Dipping</p><p class="tl-detail">Non-negotiable. You know the rules.</p><div class="tl-tags"><span class="tag tag-m">Mandatory</span></div></div></div>
+  </div>
+  <p class="sec-label">Outfit</p>
+  <div class="outfit-grid">
+    <div class="outfit-card"><p class="outfit-occ">Afternoon · Hardrock pool</p><p class="outfit-title">Resort pool</p><p class="outfit-detail">Pool party at a casino resort. Look intentional, stay comfortable.</p><div class="outfit-items"><span class="oi">Swim trunks (non-board short)</span><span class="oi">Linen shirt or resort tee</span><span class="oi">Slides or sandals + sunglasses</span></div></div>
+    <div class="outfit-card"><p class="outfit-occ">Night · Rooftops & venues</p><p class="outfit-title">Best outfit of the trip</p><p class="outfit-detail">Final night, sophisticated rooftops. This is your outfit peak. Dress like you mean it.</p><div class="outfit-items"><span class="oi">Blazer or sharp button-down</span><span class="oi">Tailored trousers or dark chinos</span><span class="oi">Leather shoes or dressy loafers</span><span class="oi">Watch if you have one</span></div></div>
+  </div>
+  <p class="sec-label">What to bring today</p>
+  <div class="bring-grid">
+    <div class="bring-item">Swim trunks (worn)</div><div class="bring-item">Sunscreen</div><div class="bring-item">Casino budget</div><div class="bring-item">Going-out fit in bag</div><div class="bring-item">Dress shoes</div><div class="bring-item">Blazer or sport coat</div><div class="bring-item">Wallet + ID</div><div class="bring-item">Dignity (optional)</div>
+  </div>
+</section>
+
+<!-- PACK LIST -->
+<section class="page" id="page-pack">
+  <div class="vibe">
+    <h2>Master Pack List</h2>
+    <p>Tap items to check them off as you pack. Don't be the guy who forgot sunscreen.</p>
+  </div>
+  <div class="pack-sec"><h3>Clothing essentials</h3><div class="pack-grid" id="pack-clothing"></div></div>
+  <div class="pack-sec"><h3>Beach & boat</h3><div class="pack-grid" id="pack-beach"></div></div>
+  <div class="pack-sec"><h3>Nightlife</h3><div class="pack-grid" id="pack-night"></div></div>
+  <div class="pack-sec"><h3>Toiletries & misc</h3><div class="pack-grid" id="pack-misc"></div></div>
+</section>
+
+<script>
+const PACK={
+  clothing:['Bathing suits (2+)','Linen shirt(s)','Going-out button-down','Blazer / sport coat','Tailored trousers or chinos','Athletic shorts','Moisture-wicking tees','Casual tees','Underwear (extra)','Socks'],
+  beach:['Flip flops / slides','Sunscreen SPF 50+','Sunglasses','Waterproof phone case','Beach towel','Rash guard'],
+  night:['Dress shoes or loafers','Clean sneakers','Belt','Watch','Cologne','Wallet + ID'],
+  misc:['Deodorant','Toothbrush + paste','Razor','Pain relievers','Phone charger','Portable charger','Cash','Venmo ready']
+};
+Object.entries(PACK).forEach(([k,items])=>{
+  const g=document.getElementById('pack-'+k);
+  items.forEach(item=>{
+    const el=document.createElement('div');
+    el.className='pack-item';
+    el.innerHTML='<div class="pack-check"></div>'+item;
+    el.onclick=()=>el.classList.toggle('checked');
+    g.appendChild(el);
+  });
+});
+
+const EVENTS=[
+  {day:'Wednesday',time:'22:45',end:'23:15',title:'Shotgun Kickoff',detail:"Ed lands. It's on.",tags:[['m','Full squad']]},
+  {day:'Wednesday',time:'23:15',end:'24:00',title:'Kahoot: The Life of Pan',detail:'Drinking game',tags:[['o','Drinking game']]},
+  {day:'Wednesday',time:'24:00',end:'26:00',title:'Superlatives Slideshow',detail:'Awardees assigned drinks',tags:[['g','Ceremony']]},
+  {day:'Thursday',time:'11:00',end:'12:00',title:'Breakfast & Devotion',detail:'Led by Pastor Andrich',tags:[['g','Mandatory']]},
+  {day:'Thursday',time:'12:00',end:'14:00',title:'March Madness Tip Off',detail:'Champagne & mimosas',tags:[['o','Champagne'],['o','Mimosas']]},
+  {day:'Thursday',time:'14:00',end:'15:00',title:'Basketball Chug Jug Relay',detail:'May the best team survive.',tags:[['m','Competition']]},
+  {day:'Thursday',time:'15:00',end:'16:00',title:'Party bus arrives',detail:'Board with beer, bathing suits on.',tags:[['o','BYOB beer']]},
+  {day:'Thursday',time:'16:00',end:'20:00',title:'Catamaran to Biscayne Bay',detail:'BBQ · BYOB · sunset · chaos',tags:[['m','Catamaran'],['o','BBQ provided']]},
+  {day:'Thursday',time:'20:00',end:'21:00',title:'Return to BnB — SSS',detail:'Shower and regroup',tags:[]},
+  {day:'Thursday',time:'21:00',end:'27:00',title:'Miami bar crawl',detail:'5 stops · Bus Survivor',tags:[['m','5 stops'],['o','Bus Survivor']]},
+  {day:'Friday',time:'12:00',end:'14:00',title:'Slow wake-up',detail:'Recovery · March Madness',tags:[['o','Recovery']]},
+  {day:'Friday',time:'14:00',end:'17:00',title:'Basketball Tournament',detail:'Nearby courts',tags:[['m','Competition']]},
+  {day:'Friday',time:'17:00',end:'20:30',title:'South Beach (optional)',detail:'Football · ocean · Ocean Drive',tags:[['g','Optional']]},
+  {day:'Friday',time:'20:30',end:'22:00',title:'Family Dinner at BnB',detail:'Full squad at the table',tags:[['o','Full squad']]},
+  {day:'Friday',time:'22:00',end:'26:00',title:'Poker Tournament',detail:'Chips on the table',tags:[['m','Tournament']]},
+  {day:'Saturday',time:'10:00',end:'12:00',title:'Wake up like new men',detail:'Ready to conquer the world',tags:[]},
+  {day:'Saturday',time:'12:00',end:'13:00',title:'Basketball Penalties',detail:'Settle the scores',tags:[['o','Penalties']]},
+  {day:'Saturday',time:'13:00',end:'19:00',title:'Hardrock Casino Pool Party',detail:'Pool DJ · casino · chaos',tags:[['m','Pool party'],['o','Casino']]},
+  {day:'Saturday',time:'19:00',end:'20:00',title:'Party bus pickup',detail:'Bus saves the day',tags:[['o','Party bus']]},
+  {day:'Saturday',time:'20:00',end:'21:00',title:'SSS at BnB — final launch',detail:'Rooftops & venues ahead',tags:[]},
+  {day:'Saturday',time:'21:00',end:'28:00',title:'Rooftops & beachfront venues',detail:'Sophisticated chaos',tags:[['m','Rooftops']]},
+  {day:'Saturday',time:'28:00',end:'29:00',title:'Mandatory Skinny Dipping',detail:'Non-negotiable',tags:[['m','Mandatory']]}
+];
+
+const DAY_DATES={Wednesday:'2026-03-18',Thursday:'2026-03-19',Friday:'2026-03-20',Saturday:'2026-03-21'};
+
+function evDate(ev,field){
+  const raw=ev[field];
+  const base=new Date(DAY_DATES[ev.day]+'T00:00:00-04:00');
+  let mins;
+  if(typeof raw==='string'){
+    const[h,m]=raw.split(':').map(Number);
+    mins=h*60+m;
+  } else {
+    mins=Math.floor(raw/100)*60+(raw%100);
+  }
+  base.setMinutes(base.getMinutes()+mins);
+  return base;
+}
+
+function parseTime(s){let[h,m]=s.split(':').map(Number);return h*100+m;}
+
+function fmtDate(d){let h=d.getHours(),m=d.getMinutes(),ap=h>=12?'pm':'am';h=h%12||12;return m?h+':'+String(m).padStart(2,'0')+ap:h+ap;}
+
+function tagHtml(ev){
+  return (ev.tags||[]).map(t=>'<span class="tag tag-'+t[0]+'">'+t[1]+'</span>').join('');
+}
+function updateMC(){
+  const now=new Date();
+  let cur=null,nxt=null;
+  for(let i=0;i<EVENTS.length;i++){
+    const s=evDate(EVENTS[i],'time'),e=evDate(EVENTS[i],'end');
+    if(now>=s&&now<e){cur=EVENTS[i];nxt=EVENTS[i+1]||null;break;}
+    if(now<s&&!nxt)nxt=EVENTS[i];
+  }
+  if(!cur&&!nxt)nxt=EVENTS[0];
+  const nowEl=document.getElementById('mc-now'),nxtEl=document.getElementById('mc-next');
+  if(cur){
+    const tags=tagHtml(cur);
+    nowEl.innerHTML='<div class="now-card"><p class="now-lbl">Current Mission</p><p class="now-ev">'+cur.title+'</p><p class="now-det">'+cur.detail+'</p>'+(tags?'<div class="tl-tags" style="margin-top:10px">'+tags+'</div>':'')+'<p class="now-day" style="margin-top:10px">'+cur.day+'</p></div>';
+  } else {
+    const ts=new Date('2026-03-18T22:45:00-04:00'),te=new Date('2026-03-22T12:00:00-04:00');
+    if(now>ts&&now<te) nowEl.innerHTML='<div class="off-card"><p class="off-title">Between missions</p><p class="off-sub">Breathe. The next one\'s coming.</p></div>';
+    else nowEl.innerHTML='<div class="off-card"><p class="off-title">The trip hasn\'t started yet</p><p class="off-sub">First mission launches Wednesday 4pm EST</p></div>';
+  }
+  if(nxt){
+    const ns=evDate(nxt,'time'),diff=ns-now,dm=Math.round(diff/60000);
+    const when=dm<60?'In '+dm+' min':dm<1440?'In '+Math.round(dm/60)+'h · '+nxt.day+' '+fmtDate(ns):nxt.day+' · '+fmtDate(ns);
+    const tags=tagHtml(nxt);
+    const cdId='mc-cd-'+Date.now();
+    nxtEl.innerHTML='<div class="next-card"><p class="next-lbl">Next Mission</p><p class="next-ev">'+nxt.title+'</p><p class="next-det">'+nxt.detail+'</p>'+(tags?'<div class="tl-tags" style="margin-top:8px">'+tags+'</div>':'')+'<div class="cd-wrap" style="margin-top:12px"><div><p class="cd-label">Countdown to next mission</p><p class="cd-timer" id="mc-cd">--:--:--</p></div><p class="cd-sub">'+nxt.day+' · '+fmtDate(ns)+'</p></div></div>';
+    window._mcTarget=ns;
+  } else nxtEl.innerHTML='';
+
+  const tripActive=now>=new Date('2026-03-18T22:45:00-04:00')&&now<=new Date('2026-03-22T12:00:00-04:00');
+  let html='',lastDay='';
+  EVENTS.forEach(ev=>{
+    if(ev.day!==lastDay){if(lastDay)html+='</div>';html+='<div class="mc-day-group"><p class="mc-day-head">'+ev.day+'</p>';lastDay=ev.day;}
+    const s=evDate(ev,'time'),e=evDate(ev,'end');
+    let cls='mc-row',badge='';
+    if(now>=s&&now<e){cls+=' current';badge='<span class="mc-badge">Now</span>';}
+    else if(tripActive&&now>e)cls+=' past';
+    html+='<div class="'+cls+'"><span class="mc-ev-t">'+fmtDate(s)+'</span><span class="mc-ev-n">'+ev.title+badge+'</span></div>';
+  });
+  html+='</div>';
+  document.getElementById('mc-full').innerHTML=html;
+}
+
+function updateClock(){
+  document.getElementById('live-clock').textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit',timeZone:'America/New_York'})+' EST';
+}
+
+function updateCD(){
+  const el=document.getElementById('mc-cd');
+  if(!el||!window._mcTarget)return;
+  const diff=window._mcTarget-new Date();
+  if(diff<=0){el.textContent="NOW";return;}
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  el.textContent=(d>0?d+'d ':'')+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+
+updateMC();updateClock();updateCD();
+setInterval(updateClock,1000);setInterval(updateCD,1000);setInterval(updateMC,30000);
+
+function show(day,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+day).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.querySelector('.nav-wrap').offsetTop-1,behavior:'smooth'});
+  if(day==='mc')updateMC();
+}
+</script>
+</body>
+</html>
