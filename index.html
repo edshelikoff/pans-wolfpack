@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pan's Wolfpack · Miami</title>
+<!-- Open Graph / iMessage link preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yourusername.github.io/pans-wolfpack/">
+<meta property="og:title" content="Pan's Wolfpack · Miami 2026">
+<meta property="og:description" content="19 men · 1 BnB · 4 days of chaos. The official trip guide for Pan's Wolfpack Miami — schedule, outfits, pack list, and Mission Control.">
+<!-- Place a preview.png in the repo root to enable the image card -->
+<meta property="og:image" content="https://yourusername.github.io/pans-wolfpack/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -115,14 +125,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
 </style>
 </head>
 <body>
-
+ 
 <div class="hero">
   <div class="hero-stripe"><span class="hs1"></span><span class="hs2"></span><span class="hs3"></span></div>
   <p class="hero-ey">Miami · March 2026</p>
   <h1 class="hero-title">Pan's <em>Wolfpack</em></h1>
   <p class="hero-sub">19 men &nbsp;·&nbsp; 1 BnB &nbsp;·&nbsp; 4 days of chaos</p>
 </div>
-
+ 
 <div class="nav-wrap">
   <nav class="nav">
     <button class="nav-tab mc-tab active" onclick="show('mc',this)">Mission Control</button>
@@ -133,7 +143,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <button class="nav-tab" onclick="show('pack',this)">Pack List</button>
   </nav>
 </div>
-
+ 
 <!-- MISSION CONTROL -->
 <section class="page active" id="page-mc">
   <div class="mc-top">
@@ -153,7 +163,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <div id="mc-full"></div>
   </div>
 </section>
-
+ 
 <!-- WEDNESDAY -->
 <section class="page" id="page-wed">
   <div class="vibe">
@@ -211,7 +221,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <div class="bring-item">Your best superlative</div>
   </div>
 </section>
-
+ 
 <!-- THURSDAY -->
 <section class="page" id="page-thu">
   <div class="vibe">
@@ -239,7 +249,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <div class="bring-item">Bathing suit (worn)</div><div class="bring-item">Sunscreen SPF 50+</div><div class="bring-item">Sunglasses</div><div class="bring-item">Beer for the boat</div><div class="bring-item">Going-out fit in bag</div><div class="bring-item">Night shoes in bag</div><div class="bring-item">Cash for bar crawl</div><div class="bring-item">Waterproof phone case</div>
   </div>
 </section>
-
+ 
 <!-- FRIDAY -->
 <section class="page" id="page-fri">
   <div class="vibe">
@@ -266,7 +276,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <div class="bring-item">Basketball shoes</div><div class="bring-item">Bathing suit</div><div class="bring-item">Sunscreen</div><div class="bring-item">Uber app ready</div><div class="bring-item">Cash for poker</div><div class="bring-item">Poker face</div>
   </div>
 </section>
-
+ 
 <!-- SATURDAY -->
 <section class="page" id="page-sat">
   <div class="vibe">
@@ -293,7 +303,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
     <div class="bring-item">Swim trunks (worn)</div><div class="bring-item">Sunscreen</div><div class="bring-item">Casino budget</div><div class="bring-item">Going-out fit in bag</div><div class="bring-item">Dress shoes</div><div class="bring-item">Blazer or sport coat</div><div class="bring-item">Wallet + ID</div><div class="bring-item">Dignity (optional)</div>
   </div>
 </section>
-
+ 
 <!-- PACK LIST -->
 <section class="page" id="page-pack">
   <div class="vibe">
@@ -305,7 +315,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15
   <div class="pack-sec"><h3>Nightlife</h3><div class="pack-grid" id="pack-night"></div></div>
   <div class="pack-sec"><h3>Toiletries & misc</h3><div class="pack-grid" id="pack-misc"></div></div>
 </section>
-
+ 
 <script>
 const PACK={
   clothing:['Bathing suits (2+)','Linen shirt(s)','Going-out button-down','Blazer / sport coat','Tailored trousers or chinos','Athletic shorts','Moisture-wicking tees','Casual tees','Underwear (extra)','Socks'],
@@ -323,7 +333,7 @@ Object.entries(PACK).forEach(([k,items])=>{
     g.appendChild(el);
   });
 });
-
+ 
 const EVENTS=[
   {day:'Wednesday',time:'22:45',end:'23:15',title:'Shotgun Kickoff',detail:"Ed lands. It's on.",tags:[['m','Full squad']]},
   {day:'Wednesday',time:'23:15',end:'24:00',title:'Kahoot: The Life of Pan',detail:'Drinking game',tags:[['o','Drinking game']]},
@@ -348,9 +358,9 @@ const EVENTS=[
   {day:'Saturday',time:'21:00',end:'28:00',title:'Rooftops & beachfront venues',detail:'Sophisticated chaos',tags:[['m','Rooftops']]},
   {day:'Saturday',time:'28:00',end:'29:00',title:'Mandatory Skinny Dipping',detail:'Non-negotiable',tags:[['m','Mandatory']]}
 ];
-
+ 
 const DAY_DATES={Wednesday:'2026-03-18',Thursday:'2026-03-19',Friday:'2026-03-20',Saturday:'2026-03-21'};
-
+ 
 function evDate(ev,field){
   const raw=ev[field];
   const base=new Date(DAY_DATES[ev.day]+'T00:00:00-04:00');
@@ -364,11 +374,11 @@ function evDate(ev,field){
   base.setMinutes(base.getMinutes()+mins);
   return base;
 }
-
+ 
 function parseTime(s){let[h,m]=s.split(':').map(Number);return h*100+m;}
-
+ 
 function fmtDate(d){let h=d.getHours(),m=d.getMinutes(),ap=h>=12?'pm':'am';h=h%12||12;return m?h+':'+String(m).padStart(2,'0')+ap:h+ap;}
-
+ 
 function tagHtml(ev){
   return (ev.tags||[]).map(t=>'<span class="tag tag-'+t[0]+'">'+t[1]+'</span>').join('');
 }
@@ -398,7 +408,7 @@ function updateMC(){
     nxtEl.innerHTML='<div class="next-card"><p class="next-lbl">Next Mission</p><p class="next-ev">'+nxt.title+'</p><p class="next-det">'+nxt.detail+'</p>'+(tags?'<div class="tl-tags" style="margin-top:8px">'+tags+'</div>':'')+'<div class="cd-wrap" style="margin-top:12px"><div><p class="cd-label">Countdown to next mission</p><p class="cd-timer" id="mc-cd">--:--:--</p></div><p class="cd-sub">'+nxt.day+' · '+fmtDate(ns)+'</p></div></div>';
     window._mcTarget=ns;
   } else nxtEl.innerHTML='';
-
+ 
   const tripActive=now>=new Date('2026-03-18T22:45:00-04:00')&&now<=new Date('2026-03-22T12:00:00-04:00');
   let html='',lastDay='';
   EVENTS.forEach(ev=>{
@@ -412,11 +422,11 @@ function updateMC(){
   html+='</div>';
   document.getElementById('mc-full').innerHTML=html;
 }
-
+ 
 function updateClock(){
   document.getElementById('live-clock').textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit',timeZone:'America/New_York'})+' EST';
 }
-
+ 
 function updateCD(){
   const el=document.getElementById('mc-cd');
   if(!el||!window._mcTarget)return;
@@ -425,10 +435,10 @@ function updateCD(){
   const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
   el.textContent=(d>0?d+'d ':'')+String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
 }
-
+ 
 updateMC();updateClock();updateCD();
 setInterval(updateClock,1000);setInterval(updateCD,1000);setInterval(updateMC,30000);
-
+ 
 function show(day,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
